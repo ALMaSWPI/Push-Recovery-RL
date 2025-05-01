@@ -1,0 +1,26 @@
+<mujoco>
+  <asset>
+    <texture name="checker" type="2d" builtin="checker" width="512" height="512" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3"/>
+    <material name="groundmat" texture="checker" texrepeat="4 4" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <!-- Ground Plane -->
+    <geom name="floor" type="plane" size="10 10 0.1" material="groundmat" pos="0 0 0" contype="0" conaffinity="0"/>
+
+
+    <!-- Cart and Pole -->
+    <body name="cart" pos="0 0 0.05">
+      <joint name="slider" type="slide" axis="1 0 0"/>
+      <geom type="box" size="0.2 0.1 0.1" rgba="0 0 1 1"/>
+      <body name="pole" pos="0 0 0.1">
+        <joint name="hinge" type="hinge" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0 0 1" size="0.05" rgba="1 0 0 1"/>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <motor joint="slider" ctrlrange="-10 10" ctrllimited="true"/>
+  </actuator>
+</mujoco>
